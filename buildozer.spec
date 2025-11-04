@@ -1,7 +1,7 @@
 [app]
 title = AirFlow IFRN
 package.name = airflowifrn
-package.domain = ifrn.edu.br
+package.domain = org.ifrn
 
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,ttf,otf
@@ -17,6 +17,3 @@ api = 33
 minapi = 21
 android.accept_sdk_license = True
 android.permissions = INTERNET
-
-[buildozer]
-log_level = 2
