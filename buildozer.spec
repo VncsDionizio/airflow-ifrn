@@ -15,7 +15,6 @@ log_level = 2
 [android]
 api = 33
 minapi = 21
-android.permissions = INTERNET
 
 # ========== CONFIGURAÇÕES ANDROID ==========
 [android]
@@ -25,8 +24,6 @@ android.accept_sdk_license = True
 # ✅ USA VERSÕES COMPATIVEIS
 android.sdk = 26
 android.ndk = 25b
-android.api = 33
-android.minapi = 21
 
 # ✅ ARQUITETURA
 android.arch = arm64-v8a
