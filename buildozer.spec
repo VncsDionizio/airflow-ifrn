@@ -1,7 +1,7 @@
 [app]
 title = AirFlow IFRN
 package.name = airflowifrn
-package.domain = org.ifrn
+package.domain = ifrn.edu.br
 
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,ttf,otf
