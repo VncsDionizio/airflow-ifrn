@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-22.04  # ✅ Usa versão estável
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -22,8 +22,7 @@ jobs:
           autoconf libtool pkg-config \
           zlib1g-dev libncurses5-dev \
           libtinfo5 cmake libffi-dev libssl-dev \
-          python3-pip python3-venv \
-          libxml2-dev libxslt-dev
+          python3-pip python3-venv
         
     - name: Install Buildozer
       run: |
@@ -31,9 +30,7 @@ jobs:
         
     - name: Build APK
       run: |
-        buildozer init
-        sed -i 's/# android.accept_sdk_license = False/android.accept_sdk_license = True/' buildozer.spec
-        buildozer -v android debug
+        buildozer -v android debug  # ✅ APENAS ESTA LINHA
       
     - name: Upload APK
       uses: actions/upload-artifact@v4
