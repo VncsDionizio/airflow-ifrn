@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build APK
 
 on: [push]
 
@@ -6,33 +6,24 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Set up Python
+    - uses: actions/checkout@v4
+    
+    - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
         
     - name: Install dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip
+        sudo apt update
+        sudo apt install -y python3-pip openjdk-17-jdk zip
         pip install buildozer
         
-    - name: Build APK with pre-accepted licenses
+    - name: Build APK
       run: |
-        # Configura para aceitar licenças
-        mkdir -p ~/.android
-        echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
-        echo 'count=0' >> ~/.android/repositories.cfg
-        
-        # Build direto
         buildozer -v android debug
       
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v4
       with:
-        name: app-apk
+        name: app
         path: bin/*.apk
-        retention-days: 7
