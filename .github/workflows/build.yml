@@ -14,31 +14,20 @@ jobs:
       with:
         python-version: '3.9'
         
-    - name: Install system dependencies
+    - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y \
-          git zip unzip openjdk-17-jdk \
-          autoconf libtool pkg-config \
-          zlib1g-dev libncurses5-dev \
-          libtinfo5 cmake libffi-dev libssl-dev \
-          python3-pip python3-venv
+        sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip
+        pip install buildozer
         
-    - name: Install Buildozer
+    - name: Build APK with pre-accepted licenses
       run: |
-        pip install buildozer cython virtualenv
+        # Configura para aceitar licenças
+        mkdir -p ~/.android
+        echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
+        echo 'count=0' >> ~/.android/repositories.cfg
         
-    - name: Configure Buildozer and accept licenses
-      run: |
-        # ✅ ACEITA TODAS AS LICENÇAS AUTOMATICAMENTE
-        yes | $HOME/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager --licenses || true
-        buildozer android updatesdk --accept-licenses
-        
-    - name: Build APK
-      run: |
-        # ✅ FORÇA ACEITAÇÃO DE LICENÇAS NO buildozer.spec
-        sed -i 's/# android.accept_sdk_license = False/android.accept_sdk_license = True/' buildozer.spec
-        sed -i 's/# android.sdk_dir =/android.sdk_dir = .\/.buildozer\/android\/platform\/android-sdk/' buildozer.spec
+        # Build direto
         buildozer -v android debug
       
     - name: Upload APK
