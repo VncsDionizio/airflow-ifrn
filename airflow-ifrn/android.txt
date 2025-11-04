@@ -1,3 +1,0 @@
-title=AirFlow-IFRN
-author=Levi-Luis-Thabatha-Vinicius
-orientation=portrait
